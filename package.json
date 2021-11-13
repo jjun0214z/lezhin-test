@@ -11,14 +11,21 @@
     "axios": "^0.24.0",
     "next": "12.0.3",
     "next-connect": "^0.11.0",
+    "next-redux-wrapper": "^7.0.5",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.0",
     "styled-components": "^5.3.3",
     "styled-reset": "^4.3.4"
   },
   "devDependencies": {
+    "@types/next-redux-wrapper": "^3.0.0",
     "@types/node": "16.11.7",
     "@types/react": "17.0.34",
+    "@types/react-redux": "^7.1.20",
+    "@types/redux-logger": "^3.0.9",
     "@types/styled-components": "^5.1.15",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-styled-components": "^1.13.3",
@@ -31,6 +38,8 @@
     "eslint-plugin-react": "^7.27.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "prettier": "^2.4.1",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-logger": "^3.0.6",
     "typescript": "4.4.4"
   }
 }
