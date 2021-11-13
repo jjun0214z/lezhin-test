@@ -14,10 +14,7 @@
       {
         "root": ["./src"],
         "alias": {
-          "@assets": "./src/assets",
-          "@utils": "./src/utils",
-          "@hooks": "./src/hooks",
-          "@components": "./src/components"
+          "@": "./src"
         }
       }
     ]
