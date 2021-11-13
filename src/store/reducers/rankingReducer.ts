@@ -9,7 +9,9 @@ export interface IRootState {
 }
 
 const initialState = {
+  count: 0,
   comicRankList: [],
+  hasNext: true,
 };
 
 export const actionTypes = {
@@ -25,9 +27,12 @@ const rootReducer = (state = initialState, action: AnyAction) => {
         ...action.payload,
       };
     case actionTypes.SET_RANKING_LIST:
+      const { count, comicRankList } = action.payload;
+
       return {
         ...state,
-        ...action.payload,
+        count: state.count + (count || 0),
+        comicRankList: [...state.comicRankList, ...(comicRankList || [])],
       };
     default:
       return { ...state };

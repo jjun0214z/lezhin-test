@@ -11,11 +11,18 @@ import {
 const handler = nc<
   NextApiRequest,
   NextApiResponse<ComicRankApiSuccessResponse | ComicRankApiFailResponse>
->().get((req, res) => {
+>({
+  onError: (err, req, res, next) => {
+    res.status(500).send({ error: 'API 호출에 실패했습니다.' });
+  },
+  onNoMatch: (req, res, next) => {
+    res.status(404).send({ error: '페이지가 없습니다' });
+  },
+}).get((req, res) => {
   const {
     query: { page },
   } = req;
-
+  console.log(Number(page));
   if (Number(page) < 5) {
     const mock = require(`@/mock/page_${page}.json`) || null;
     const {
@@ -27,7 +34,7 @@ const handler = nc<
       count: number;
       data: ComicRankItem[];
     } = mock as { hasNext: boolean; count: number; data: ComicRankItem[] };
-    res.statusCode = 200;
+    // res.statusCode = 200;
     res.json({
       data: {
         hasNext,
@@ -36,9 +43,7 @@ const handler = nc<
       },
     });
   } else {
-    res.json({
-      error: '페이지가 없습니다.',
-    });
+    res.status(404).send({ error: 'API 호출에 실패했습니다.' });
   }
 });
 export default handler;

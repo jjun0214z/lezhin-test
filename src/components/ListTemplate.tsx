@@ -5,12 +5,14 @@ import { useSelector } from 'react-redux';
 import { ReducerType } from '@/store/reducers';
 import { ComicRankItem } from '@/types/mock';
 import { IRootState as rankingState } from '@/store/reducers/rankingReducer';
+import { Loader } from 'semantic-ui-react';
 
 interface IProps {
   title: string;
+  isLoading: boolean;
 }
 
-export default function ListTemplate({ title }: IProps) {
+export default function ListTemplate({ title, isLoading }: IProps) {
   const { comicRankList }: rankingState = useSelector(
     (state: ReducerType) => state.ranking
   );
@@ -38,6 +40,7 @@ export default function ListTemplate({ title }: IProps) {
         {comicRankList.map((item) => {
           return <Item key={item.id} itemInfo={item} />;
         })}
+        {isLoading && <Loader active inline="centered" />}
       </WebToonList>
     </>
   );
