@@ -1,24 +1,44 @@
-import { API_COMICS } from '@/assets/api';
+import API from '@/assets/api/comics';
 import { ReducerType } from '@/store/reducers';
-import { AC_RANKING } from '@/store/reducers/types';
 import { axFetch } from '@/utils/axios';
-import axios from 'axios';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { AC_RANKING } from '@/store/reducers/types';
+import styled from 'styled-components';
+import ListTemplate from '@/components/ListTemplate';
 
-function RankingList() {
-  const { rankingList } = useSelector((state: ReducerType) => state.ranking);
-
+export default function RankingList() {
+  const [page, setPage] = useState(1);
+  const { count, hasNext, comicRankList } = useSelector(
+    (state: ReducerType) => state.ranking
+  );
   const dispatch = useDispatch();
 
+  const fetchData = async function () {
+    const res = await axFetch(API.COMIC_RANKING_LIST, { page });
+    if (res && res.status === 200) {
+      const {
+        data: { data },
+      } = res;
+
+      dispatch({
+        type: AC_RANKING.SET_RANKING_LIST,
+        payload: data,
+      });
+    }
+  };
+
   useEffect(() => {
-    // dispatch({
-    //   type: AC_RANKING.SET_RANKING_LIST,
-    //   payload: [],
-    // });
-    // axFetch(API_COMICS.COMIC_RANKING_LIST, { page: 1 });
-  }, []);
-  return <div>1</div>;
+    fetchData();
+  }, [page]);
+
+  return (
+    <Wrapper>
+      <ListTemplate title={'로맨스 장르 랭킹'} />
+    </Wrapper>
+  );
 }
 
-export default RankingList;
+const Wrapper = styled.div`
+  padding: 5px;
+`;

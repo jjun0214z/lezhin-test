@@ -3,11 +3,13 @@ import { HYDRATE } from 'next-redux-wrapper';
 import { ComicRankItem } from '@/types/mock';
 
 export interface IRootState {
-  rankingList: ComicRankItem[];
+  count: number; // 아이템 전체 카운트
+  hasNext: boolean; // 다음 page 존재 여부
+  comicRankList: ComicRankItem[]; // 아이템 리스트
 }
 
 const initialState = {
-  rankingList: [],
+  comicRankList: [],
 };
 
 export const actionTypes = {
@@ -23,10 +25,9 @@ const rootReducer = (state = initialState, action: AnyAction) => {
         ...action.payload,
       };
     case actionTypes.SET_RANKING_LIST:
-      const { rankingList } = action.payload;
       return {
         ...state,
-        rankingList,
+        ...action.payload,
       };
     default:
       return { ...state };

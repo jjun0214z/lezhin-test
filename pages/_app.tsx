@@ -4,6 +4,7 @@ import { theme } from '@/assets/styles/theme';
 import GlobalStyle from '@/assets/styles/globalStyle';
 import wrapper from '@/store/configureStore';
 import { NextPage } from 'next';
+import 'semantic-ui-css/semantic.min.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

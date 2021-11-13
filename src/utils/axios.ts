@@ -12,14 +12,13 @@ const ax = axios.create({
   timeout: 1000,
 });
 
-export const axFetch = async function (
+export const axFetch = function (
   api: IAPI,
   options: IApiOptions = {}
 ): Promise<AxiosResponse> {
-  const res = await ax.request({
+  const res = ax.request({
     ...api,
     [api.method === 'get' ? 'params' : 'data']: options,
   });
-  console.log(res, 'resres');
   return res;
 };
