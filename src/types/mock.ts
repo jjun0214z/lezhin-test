@@ -31,6 +31,7 @@ export interface ComicRankItem {
   previousRank: number; // 이전 랭킹
   updatedAt: number; // 업데이트 일자
   print: boolean; // 단행본 여부
+  thumbnailSrc: string;
 }
 
 export interface ComicRankApiSuccessResponse {

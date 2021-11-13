@@ -1,11 +1,20 @@
 import styled from 'styled-components';
 import FilterList from '@/components/FilterList';
+import Item from '@/components/Item';
+import { useSelector } from 'react-redux';
+import { ReducerType } from '@/store/reducers';
+import { ComicRankItem } from '@/types/mock';
+import { IRootState as rankingState } from '@/store/reducers/rankingReducer';
 
 interface IProps {
   title: string;
 }
 
 export default function ListTemplate({ title }: IProps) {
+  const { comicRankList }: rankingState = useSelector(
+    (state: ReducerType) => state.ranking
+  );
+
   const sortOptions = [
     {
       label: '연재 중',
@@ -25,6 +34,11 @@ export default function ListTemplate({ title }: IProps) {
     <>
       <Title>{title}</Title>
       <FilterList />
+      <WebToonList>
+        {comicRankList.map((item) => {
+          return <Item key={item.id} itemInfo={item} />;
+        })}
+      </WebToonList>
     </>
   );
 }
@@ -33,3 +47,4 @@ const Title = styled.h1`
   font-size: 20px;
   color: #000;
 `;
+const WebToonList = styled.div``;

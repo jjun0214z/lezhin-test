@@ -1,13 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle` 
-    html,
-    body {
-      overflow: hidden;
-    }
-
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
 `;
 

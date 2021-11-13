@@ -2,6 +2,9 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { Checkbox } from 'semantic-ui-react';
 import styled from 'styled-components';
 
+interface IProps {
+  filterOptions?: IOtions[];
+}
 interface IOtions {
   label: string;
   value: string;
@@ -9,26 +12,28 @@ interface IOtions {
   relationKey?: string;
 }
 
-export default function FilterList() {
-  const [options, setOptions] = useState<IOtions[]>([
-    {
-      label: '연재 중',
-      value: '01',
-      checked: true,
-      relationKey: '01',
-    },
-    {
-      label: '완결',
-      value: '02',
-      checked: false,
-      relationKey: '01',
-    },
-    {
-      label: '무료회차 3개 이상',
-      value: '03',
-      checked: true,
-    },
-  ]);
+export default function FilterList({ filterOptions }: IProps) {
+  const [options, setOptions] = useState<IOtions[]>(
+    filterOptions || [
+      {
+        label: '연재 중',
+        value: '01',
+        checked: true,
+        relationKey: '01',
+      },
+      {
+        label: '완결',
+        value: '02',
+        checked: false,
+        relationKey: '01',
+      },
+      {
+        label: '무료회차 3개 이상',
+        value: '03',
+        checked: true,
+      },
+    ]
+  );
 
   const handleChange = function (payload: IOtions): void {
     const { value, checked, relationKey } = payload;
@@ -96,6 +101,9 @@ export default function FilterList() {
 }
 
 const ColBox = styled.div`
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000;
   .col {
     display: inline-block;
     margin-left: 10px;
