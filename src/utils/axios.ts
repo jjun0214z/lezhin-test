@@ -20,6 +20,6 @@ export const axFetch = async function (
     ...api,
     [api.method === 'get' ? 'params' : 'data']: options,
   });
-
+  console.log(res, 'resres');
   return res;
 };

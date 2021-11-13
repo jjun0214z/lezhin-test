@@ -6,3 +6,7 @@ export interface IAPI {
 export interface IApiOptions {
   [key: string]: any;
 }
+
+export interface IApiSet {
+  [key: string]: IAPI;
+}
